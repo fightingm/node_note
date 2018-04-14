@@ -21,13 +21,13 @@ http.createServer(async (req, res) => {
         try {
             const file = await loadFile(`.${pathName}`);
             const contentType = await loadContentType(extName);
-            res.writeHead(200, {"Content-Type": `${contentType}, charset=utf-8`});
+            res.writeHead(200, {"Content-Type": `${contentType}; charset=utf-8`});
             res.write(file);
             res.end();
         } catch (error) {
             console.log(error);
             const file = await loadFile(`./404.html`);
-            res.writeHead(200, {"Content-Type": "text/html, charset=utf-8"});
+            res.writeHead(200, {"Content-Type": "text/html; charset=utf-8"});
             res.write(file);
             res.end();
         }
