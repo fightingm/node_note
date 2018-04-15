@@ -8,6 +8,18 @@ const dburl = "mongodb://localhost:27017/";
 
 const app = new myexpress();
 
+//创建一个test数据库
+MongoClient.connect(dburl+'test', function(err, db) {
+    if (err) throw err;
+    console.log("数据库已创建!");
+    const dbase = db.db("test");
+    dbase.createCollection('user', function (err, res) {
+        if (err) throw err;
+        console.log("创建集合!");
+        db.close();
+    });
+});
+
 // 增加一条数据
 app.get('/add', (req, res) => {
     MongoClient.connect(dburl, function(err, db) {
@@ -82,4 +94,4 @@ app.get('/', (req, res) => {
     });
 });
 
-app.listen(3000);
+app.listen(8000);
